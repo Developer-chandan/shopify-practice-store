@@ -1,0 +1,29 @@
+<div class="">
+  <div class="">
+    <a href="{{ product.url }}">
+      {% if product.featured_image %}
+        <img
+          width=""
+          height=""
+          src="{{ product.featured_image | image_url}}"
+          alt="{{ product.featured_image.alt }}"
+          class="w-full h-full object-cover hover:transform duration-150"
+        >
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag }}
+      {% endif %}
+    </a>
+    <div>
+      {% if show_vendor %}
+        <span class="text-gray-300">{{ product.vendor }}</span>
+      {% endif %}
+      {% unless product.available %}
+        <h4 class="text-red-500">Stock Out</h4>
+      {% endunless %}
+      <a href="{{ product.url }}">
+        <h4 class="text-md font-bold">{{ product.title }}</h4>
+      </a>
+      <h4>{{ product.price | money }}</h4>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+{{ 'application.css' | asset_url | stylesheet_tag }}
+
+<div class="container mx-auto">
+  <h2 class="text-center py-12">All Collections</h2>
+
+  <div class="flex flex-col">
+    {% paginate collection.products by section.settings.number_of_product_per_page %}
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {% for product in collection.products %}
+          {% render 'custom-product',
+             product: product,
+             show_vendor: section.settings.show_vendor %}
+        {% endfor %}
+      </div>
+      <div>
+        {% render 'custom-pagination', pagination: paginate %}
+      </div>
+    {% endpaginate %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Template Collection",
+    "settings": [
+      {
+        "type": "number",
+        "default": 7,
+        "label": "Number of product per page",
+        "id": "number_of_product_per_page"
+      },
+      {
+      "type": "checkbox",
+      "default": true,
+      "id": "show_vendor",
+      "label": "Show Vendor"
+      }
+    ]
+  }
+{% endschema %}

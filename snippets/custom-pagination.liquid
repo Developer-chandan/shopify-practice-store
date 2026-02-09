@@ -1,0 +1,18 @@
+{% if pagination.pages > 1 %}
+    <nav>
+        {% if pagination.previous %}
+                    <a class="cursor-pointer py-8 px-4 my-4 bg-red-100 text-black border-2 border-amber-200" href="{{ pagination.previous.url }}">Prv</a>
+        {% endif %}
+        {% for part in pagination.parts %}
+            {% if part.url %}
+                            <a class="cursor-pointer py-8 px-4 my-4 bg-red-100 text-black border-2 border-amber-200" href="{{ part.url }}"> {{ part.title }}</a>
+                {% else %}
+                    <span class="py-8 px-4 my-4 bg-red-100 text-black border-2 border-amber-200">{{ part.title }}</span>
+            {% endif %}
+        {% endfor %}
+
+        {% if pagination.next %}
+            <a class="py-8 px-4 my-4 bg-red-100 text-black border-2 border-amber-200 cursor-pointer" href="{{ pagination.next.url }}">Next</a>
+        {% endif %}
+    </nav>
+{% endif %}

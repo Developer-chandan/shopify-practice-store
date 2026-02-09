@@ -1,0 +1,127 @@
+<h2 class="text-center p-8">Custom Cart Page</h2>
+
+{% if cart.item_count > 0 %}
+  <form action="{{ routes.cart_url }}" novalidate method="POST">
+    <div class="container mx-auto">
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="border-b text-left text-sm font-semibold text-gray-700">
+              <th class="py-3 pr-4">Product</th>
+              <th class="py-3 px-4 text-center">Quantity</th>
+              <th class="py-3 pl-4 text-right">Total</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- LOOP START -->
+            {% for item in cart.items %}
+              <tr class="table-row">
+                <td>
+                  {% if item.image %}
+                    <img
+                      src="{{ item | image_url }}"
+                      width=""
+                      height=""
+                      alt=""
+                      class="w-20 h-20 object-cover"
+                    >
+                    <h2 class="text-md py-4">{{ item.product.title }}</h2>
+                    <small>{{ item.variant.title }}</small>
+                    <a
+                      href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+                      class="text-red-500 font-semibold"
+                      >Remove</a
+                    >
+
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  {% endif %}
+                </td>
+                <td>
+                  <input class="w-20 border-2 border-red-300" type="number" value="{{ item.quantity }}" name="updates[]" min="1" id="updates_{{ forloop.index }}">
+                </td>
+                <td>
+                  <p>{{ item.final_line_price | money }}</p>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="flex justify-between container mx-auto" style="display:flex;justify-content:space-between;">
+          <div class="flex flex-col">
+            <label for="textarea">Add Note</label>
+            <textarea name="" id="textarea" class="w-80 h-12 border border-red-100"></textarea>
+          </div>
+         
+          <div class="p-4 flex flex-col gap-1">
+             {% for blocks in section.blocks %}
+            {% case blocks.type %}
+              {% when "subtotal" %}
+            <h4>Total Price: {{ cart.total_price | money }}</h4>
+                
+              {% when "update_button" %}
+                 <button
+              class="cursor-pointer py-4 px-8 block border-2 border-red-950 bg-white text-red-950"
+              type="submit"
+              name="update"
+            >
+              Update Cart
+            </button>
+              {% when "checkout_btn" %}
+                 <button
+              class="cursor-pointer py-4 px-8 block border-2 bg-red-950  text-red-50"
+              type="submit"
+              name="checkout"
+            >
+              Checkout
+            </button>
+                
+              {% else %}
+                
+            {% endcase %}
+          {% endfor %}
+           
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+{% else %}
+  <div class="flex justify-center">
+    <div>
+      <h2 class="text-lg text-center">Cart is empty</h2>
+      <a href="{{ routes.all_products_collection_url }}">Visit Our Collection</a>
+    </div>
+  </div>
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Custom Cart",
+    "blocks": [
+      {
+      "type": "subtotal",
+      "name": "Subtotal",
+      "limit": 1
+      },
+       {
+      "type": "update_button",
+      "name": "Update Button",
+      "limit": 1
+      },
+       {
+      "type": "checkout_btn",
+      "name": "Checkout Button",
+      "limit": 1
+      }
+      
+
+    ],
+    "presets": []
+  }
+{% endschema %}

@@ -1,0 +1,58 @@
+{{ 'application.css' | asset_url | stylesheet_tag }}
+
+<div class="container mx-auto">
+  {% paginate blog.articles by section.settings.number_of_blog_post %}
+    <div class="grid grid-cols-1  md:grid-cols-3 gap-1">
+    
+        {% for article in blog.articles %}
+          <div class="w-full">
+            {% if article.image %}
+              <a href="{{ article.url }}">
+                <img
+                  class="w-full h-80 object-cover"
+                  src="{{ article.image | image_url:width:450 }}"
+                  width=""
+                  height=""
+                  alt=""
+                >
+              </a>
+            {% else %}
+              {{ article.image | placeholder_svg_tag: 'w-full h-80 object-cover' }}
+            {% endif %}
+
+            <div class="p-4">
+              <h1 class="text-sm">{{ article.title }}</h1>
+              {% if article.excerpt.size > 0 %}
+                {{ article.content | strip_html | truncate: '30' }}
+
+              {% else %}
+                {{ article.content | strip_html | truncate: '30' }}
+              {% endif %}
+
+              <a class="underline" href="{{ article.url }}">Read More</a>
+            </div>
+          </div>
+        {% endfor %}
+     
+    </div>
+    <div class="flex justify-center">
+        {% render 'custom-pagination', pagination: paginate %}
+    </div>
+  {% endpaginate %}
+</div>
+
+{% schema %}
+{
+  "settings": [
+    {
+      "type": "range",
+      "label": "Number of post",
+      "max": 4,
+      "min": 1,
+      "default": 2,
+      "id": "number_of_blog_post"
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

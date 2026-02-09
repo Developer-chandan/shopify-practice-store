@@ -1,0 +1,61 @@
+{{ 'application.css' | asset_url | stylesheet_tag }}
+
+<div class="container mx-auto">
+  <div class="bg-red-200 p-8">
+    <h2 class="text-center py-8">{{ section.settings.title_featured_collection }}</h2>
+  </div>
+  <div
+    style="display:grid; grid-template-columns: repeat({{ section.settings.number_of_product_in_row }}, 1fr);"
+    class="grid grid-cols-{{ section.settings.number_of_product_in_row }}"
+  >
+
+   
+      {% for product in section.settings.custom_featured_collection.products limit: section.settings.number_of_product %}
+      <div>
+        {% render 'custom-product', product: product %}
+      </div>
+      
+    {% else %}
+      {% for item in (1..4) %}
+        {% render 'custom-placeholder-product' %}
+      {% endfor %}
+{% endfor %}
+    
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Feautured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Title",
+      "default": "Featured Collection",
+      "id": "title_featured_collection"
+    },
+    {
+      "type": "number",
+      "label": "Number of product to show",
+      "default": 4,
+      "id": "number_of_product"
+    },
+    {
+      "type": "collection",
+      "label": "Collection",
+      "id": "custom_featured_collection"
+    },
+    {
+      "type": "number",
+      "default": 4,
+      "id": "number_of_product_in_row",
+      "label": "Number of product in row"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Featured Collection"
+    }
+  ]
+}
+{% endschema %}

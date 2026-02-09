@@ -1,0 +1,226 @@
+{{ 'application.css' | asset_url | stylesheet_tag }}
+
+
+
+<article class="container mx-auto">
+{% for block in section.blocks %}
+   {% case block.type %}
+    {% when "article_title" %}
+        {% if article.title %}
+    <h1>{{ article.title }}</h1>
+
+{% endif %}
+    {% when "article_author" %}
+        
+{% if article.author %}
+    <small>{{ article.author }}</small>
+{% endif %}
+
+     {% when "article_published_date" %}
+        
+
+{% if article.published_at %}
+    <time datetime="{{ article.published_at | date:"%Y-%m-%d" }}">{{ article.published_at | date:"%Y-%m-%d" }}</time>
+{% endif %}
+     {% when "article_thumbnail" %}
+        {% if article.image%}
+    <img src="{{ article.image | image_url:width:1200 }}" width="" height="" alt="">
+{% endif %}
+     {% when "article_content" %}
+
+{% if article.content %}
+    <div>
+        {{ article.content }}
+    </div>
+{% endif %}
+
+        
+    {% else %}
+        
+   {% endcase %}
+{% endfor %}
+
+</article>
+
+{% if blog.comments_enabled? %}
+    {% if article.comments_count > 0 %}
+    <div>
+      <h2 class="text-center py-8">See what our customer says</h2>
+        Number of comment {{ article.comments_count }}
+      {% paginate article.comments by 5 %}
+        {% for comment in article.comments %}
+          <h5 class="text-2xl">{{ comment.author }}</h5> 
+          <span>{{ comment.created_at }}</span>
+          <p class="text-[18px]">{{ comment.content }}</p>   
+        {% endfor %}
+      {% endpaginate %}
+    </div>
+{% endif %}
+{% endif %}
+
+
+{% if blog.comments_enabled? %}
+  <div class="max-w-3xl mt-16 container max-auto">
+    <h3 class="text-2xl font-semibold mb-6">
+      Leave a comment
+    </h3>
+
+    {% form 'new_comment', article %}
+
+      {% if form.errors %}
+        <div class="mb-6 text-sm text-red-600">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
+       {% if form.posted_successfully? %}
+        <p class="mt-4 text-sm text-green-600">
+          <div>
+            {% render 'icon-success' %}
+            <span>Comment placed successfully</span>
+          </div>
+          {% if blog.moderated? %}
+            It will appear once approved.
+          {% endif %}
+        </p>
+        
+      {% endif %}
+
+      {% if form.errors %}
+        <p class="mt-4 text-sm text-green-600">
+          <div>
+            <p class="w-10 h-10 bg-green-300 ">
+{% render 'icon-error'%}
+            </p>
+            
+            <span>Oh no! Something went wrong..</span>
+            {% for error in form.errors %}
+                          <p>Message : {{ form.errors.messages[error] }}</p>
+            {% endfor %}
+          </div>
+         
+        </p>
+        
+      {% endif %}
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="w-full md:w-1/2">
+          <label
+            for="CommentAuthor"
+            class="block text-sm font-medium mb-2"
+          >
+            Name
+          </label>
+          <input
+            type="text"
+            id="CommentAuthor"
+            name="comment[author]"
+            value="{{ form.author }}"
+            required
+            class="w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+          >
+        </div>
+
+        <div class="w-full md:w-1/2">
+          <label
+            for="CommentEmail"
+            class="block text-sm font-medium mb-2"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="CommentEmail"
+            name="comment[email]"
+            value="{{ form.email }}"
+            required
+            class="w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+          >
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <label
+          for="CommentBody"
+          class="block text-sm font-medium mb-2"
+        >
+          Message
+        </label>
+        <textarea
+          id="CommentBody"
+          name="comment[body]"
+          rows="5"
+          required
+          class="w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+        >{{ form.body }}</textarea>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="mt-8 inline-flex items-center cursor-pointer justify-center bg-black text-white px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+      >
+        Post Comment
+      </button>
+
+      
+     
+
+    {% endform %}
+  </div>
+{% endif %}
+
+
+
+
+
+{% schema %}
+    {
+        "settings": [
+            {
+             "type": "checkbox",
+             "label": "Show Author",
+             "default": true,
+             "id": "article_author"
+            },
+            {
+             "type": "checkbox",
+             "label": "Show Date",
+             "default": true,
+             "id": "article_date"
+            }
+        ],
+        "blocks": [
+            {
+            "type": "article_title",
+            "name": "Title",
+            "limit": 1
+            },
+            {
+            "type": "article_author",
+            "name": "Author",
+            "limit": 1
+            },
+            {
+            "type": "article_published_date",
+            "name": "Publish Date",
+            "limit": 1
+            },
+            {
+            "type": "article_thumbnail",
+            "name": "Thumbnail",
+            "limit": 1
+            },
+            {
+            "type": "article_content",
+            "name": "Content",
+            "limit": 1
+            },
+        ],
+        "presets": [
+            {
+             "name": "My presets"
+            }
+        ]
+    }
+{% endschema %}
