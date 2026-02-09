@@ -1,0 +1,18 @@
+<h2 class="text-center">Custom Product page</h2>
+
+<div class="container mx-auto">
+ <div class="flex justify-center gap-2">
+    <div class="w-1/2">
+        {% for media in product.media %}
+            {% render 'custom-media', media:media %}
+        {% endfor %}
+    </div>
+    <div class="w-1/2"></div>
+ </div>
+</div>
+
+
+{% for media in product.media %}
+
+    
+{% endfor %}

@@ -1,0 +1,10 @@
+<div>
+    {% case media.media_type %}
+        {% when "image" %}
+            <img src="{{ media | image_url:'medium' }}" width="" height="" class="w-full h-full" alt="">
+        {% else %}
+            
+    {% endcase %}
+ 
+   
+</div>
