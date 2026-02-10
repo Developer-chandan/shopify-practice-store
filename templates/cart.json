@@ -12,16 +12,25 @@
     "cart-items": {
       "type": "template-cart",
       "blocks": {
-        "subtotal": { "type": "subtotal"},
-        "update_button": { "type": "update_button"},
-        "checkout_btn": { "type": "checkout_btn"},
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "update_button": {
+          "type": "update_button",
+          "settings": {}
+        },
+        "checkout_btn": {
+          "type": "checkout_btn",
+          "settings": {}
+        }
       },
-      "block_order": ["subtotal", "update_button","checkout_btn"],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+      "block_order": [
+        "subtotal",
+        "update_button",
+        "checkout_btn"
+      ],
+      "settings": {}
     }
   },
   "order": [

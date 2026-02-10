@@ -13,11 +13,14 @@
     --color-red-300: oklch(80.8% 0.114 19.571);
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-red-600: oklch(57.7% 0.245 27.325);
+    --color-red-700: oklch(50.5% 0.213 27.518);
     --color-red-950: oklch(25.8% 0.092 26.042);
     --color-amber-200: oklch(92.4% 0.12 95.746);
     --color-green-300: oklch(87.1% 0.15 154.449);
     --color-green-600: oklch(62.7% 0.194 149.214);
+    --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-500: oklch(55.1% 0.027 264.364);
     --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-black: #000;
     --color-white: #fff;
@@ -198,6 +201,12 @@
   .static {
     position: static;
   }
+  .sticky {
+    position: sticky;
+  }
+  .top-7 {
+    top: calc(var(--spacing) * 7);
+  }
   .isolate {
     isolation: isolate;
   }
@@ -233,6 +242,9 @@
   }
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
+  }
+  .mt-12 {
+    margin-top: calc(var(--spacing) * 12);
   }
   .mt-16 {
     margin-top: calc(var(--spacing) * 16);
@@ -301,6 +313,9 @@
   .w-80 {
     width: calc(var(--spacing) * 80);
   }
+  .w-\[450px\] {
+    width: 450px;
+  }
   .w-full {
     width: 100%;
   }
@@ -360,6 +375,12 @@
   .overflow-x-auto {
     overflow-x: auto;
   }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -390,6 +411,12 @@
   .bg-black {
     background-color: var(--color-black);
   }
+  .bg-gray-200 {
+    background-color: var(--color-gray-200);
+  }
+  .bg-gray-300 {
+    background-color: var(--color-gray-300);
+  }
   .bg-green-300 {
     background-color: var(--color-green-300);
   }
@@ -401,6 +428,9 @@
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
+  }
+  .bg-red-700 {
+    background-color: var(--color-red-700);
   }
   .bg-red-950 {
     background-color: var(--color-red-950);
@@ -465,6 +495,10 @@
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
   }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
   .text-\[18px\] {
     font-size: 18px;
   }
@@ -485,6 +519,9 @@
   }
   .text-gray-300 {
     color: var(--color-gray-300);
+  }
+  .text-gray-500 {
+    color: var(--color-gray-500);
   }
   .text-gray-700 {
     color: var(--color-gray-700);
@@ -515,6 +552,9 @@
   }
   .italic {
     font-style: italic;
+  }
+  .line-through {
+    text-decoration-line: line-through;
   }
   .underline {
     text-decoration-line: underline;

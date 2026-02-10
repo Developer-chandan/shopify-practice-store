@@ -1,18 +1,86 @@
-<h2 class="text-center">Custom Product page</h2>
-
-<div class="container mx-auto">
- <div class="flex justify-center gap-2">
-    <div class="w-1/2">
+<h2 class="text-center py-8 bg-red-200">Custom Product page</h2>
+<div class="mt-12">
+  <div class="container mx-auto">
+    <div class="flex justify-center gap-2">
+      <div class="w-1/2 sticky top-7">
         {% for media in product.media %}
-            {% render 'custom-media', media:media %}
+          {% render 'custom-media', media: media %}
         {% endfor %}
+      </div>
+      <div class="w-1/2">
+        {% form 'product', product %}
+          <div data-url="{{ product.url }}" data-section="{{ section.id }}">
+            <span>{{ product.vendor }}</span>
+            <h2>{{ product.title }}</h2>
+            {% assign selected_product = product.selected_or_first_available_variant %}
+            <span class="text-xl text-gray-500 line-through">{{ selected_product.compare_at_price | money }}</span>
+            <span class="text-2xl text-black">{{ selected_product.price | money }}</span>
+
+            {% if selected_product.compare_at_price > selected_product.price %}
+              <span class="px-4 rounded-full bg-red-700 text-white">Sale</span>
+            {% endif %}
+          </div>
+        {% endform %}
+
+        {% unless product.variants > 0 %}
+          {% for option in product.options_with_values %}
+            <label class="text-bold" for="Options[{{ section.id }}]-[{{ forloop.index0 }}]">{{ option.name }}</label>
+            <div class="w-full">
+              <select
+                class="w-full"
+                name="Option-{{option.name | escape  }}"
+                id="Options[{{ section.id }}]-[{{ forloop.index0 }}]"
+              >
+                {% for value in option.values %}
+                  <option
+                    class=""
+                    value="{{ value | escape }}"
+                    class="bg-gray-300"
+                    {% if option.selected_value == value %}
+                      selected="selected" class="w-full bg-red-200"
+                    {% endif %}
+                  >
+                    {{ value }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endfor %}
+        {% endunless %}
+
+        <div>
+          <a href="{{ product.url }}">
+            <button type="submit" name="add" class="rounded cursor-pointer w-full bg-black text-white py-4">
+              +   Add To Cart
+            </button>
+          </a>
+        </div>
+        <div>
+          {{ product.description }}
+        </div>
+        <div class="">
+          <div>
+            <img
+              src="{{ section.settings.upload_trust_badge_image | image_url:width:450 }}"
+              width=""
+              height=""
+              alt="{{ product.images.alt }}"
+            >
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="w-1/2"></div>
- </div>
+  </div>
 </div>
 
-
-{% for media in product.media %}
-
-    
-{% endfor %}
+{% schema %}
+{
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "upload_trust_badge_image",
+      "label": "Upload Trust Badge"
+    }
+  ]
+}
+{% endschema %}

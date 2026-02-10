@@ -1,9 +1,0 @@
-{
-    "sections": {
-        "list-collection":{
-            "type": "list-collection_custom"
-        }
-        
-    },
-    "order": ["list-collection"]
-}
