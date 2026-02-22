@@ -1,73 +1,113 @@
 <h2 class="text-center py-8 bg-red-200">Custom Product page</h2>
+
 <div class="mt-12">
   <div class="container mx-auto">
     <div class="flex justify-center gap-2">
+      <!-- Product Media -->
       <div class="w-1/2 sticky top-7">
         {% for media in product.media %}
           {% render 'custom-media', media: media %}
         {% endfor %}
       </div>
+
+      <!-- Product Info -->
       <div class="w-1/2">
         {% form 'product', product %}
-          <div data-url="{{ product.url }}" data-section="{{ section.id }}">
-            <span>{{ product.vendor }}</span>
-            <h2>{{ product.title }}</h2>
-            {% assign selected_product = product.selected_or_first_available_variant %}
-            <span class="text-xl text-gray-500 line-through">{{ selected_product.compare_at_price | money }}</span>
-            <span class="text-2xl text-black">{{ selected_product.price | money }}</span>
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {% assign selected_product = product.selected_or_first_available_variant %}
 
-            {% if selected_product.compare_at_price > selected_product.price %}
-              <span class="px-4 rounded-full bg-red-700 text-white">Sale</span>
+          <div data-url="{{ product.url }}" data-section="{{ section.id }}">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'vendor' %}
+                  <span>{{ product.vendor }}</span>
+
+                {% when 'title' %}
+                  <h2>{{ product.title }}</h2>
+                {% when 'price' %}
+                  <!-- Price -->
+                  {% if selected_product.compare_at_price > selected_product.price %}
+                    <span class="text-xl text-gray-500 line-through">
+                      {{ selected_product.compare_at_price | money }}
+                    </span>
+                    <span class="text-2xl text-black">
+                      {{ selected_product.price | money }}
+                    </span>
+                    <span class="px-4 rounded-full bg-red-700 text-white">Sale</span>
+                  {% else %}
+                    <span class="text-2xl text-black">
+                      {{ selected_product.price | money }}
+                    </span>
+                  {% endif %}
+                {% when 'varient' %}
+                  <!-- Variant Options -->
+                  {% comment %} {% render 'product-variant-picker' %} {% endcomment %}
+                  {% if product.variants.size > 1 %}
+                    {% for option in product.options_with_values %}
+                      <label class="font-bold" for="Option-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+
+                      <select
+                        class="w-full border-2 border-gray-400 mb-4"
+                        name="options[{{ option.name }}]"
+                        id="Option-{{ forloop.index0 }}"
+                      >
+                        {% for value in option.values %}
+                          <option
+                            value="{{ value | escape }}"
+                            {% if option.selected_value == value %}
+                              selected
+                            {% endif %}
+                          >
+                            {{ value }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                    {% endfor %}
+                  {% endif %}
+                {% when 'description' %}
+                  <!-- Description -->
+                  <div class="mt-6">
+                    {{ product.description }}
+                  </div>
+                {% when 'addtocart' %}
+                  <!-- Add to Cart -->
+                  <button
+                    type="submit"
+                    name="add"
+                    class="rounded cursor-pointer w-full bg-black text-white py-4 mt-4"
+                    {% unless selected_product.available %}
+                      disabled
+                    {% endunless %}
+                  >
+                    {% if selected_product.available %}
+                      + Add To Cart
+                    {% else %}
+                      Sold Out
+                    {% endif %}
+                  </button>
+
+                {% when 'checkout' %}
+
+                {% else %}
+
+              {% endcase %}
+            {% endfor %}
+
+            <!-- Trust Badge -->
+            {% if section.settings.upload_trust_badge_image %}
+              <div class="mt-6">
+                <img
+                  src="{{ section.settings.upload_trust_badge_image | image_url: width: 450 }}"
+                  alt="Trust badge"
+                  width=""
+                  height=""
+                >
+              </div>
             {% endif %}
           </div>
         {% endform %}
-
-        {% unless product.variants > 0 %}
-          {% for option in product.options_with_values %}
-            <label class="text-bold" for="Options[{{ section.id }}]-[{{ forloop.index0 }}]">{{ option.name }}</label>
-            <div class="w-full">
-              <select
-                class="w-full"
-                name="Option-{{option.name | escape  }}"
-                id="Options[{{ section.id }}]-[{{ forloop.index0 }}]"
-              >
-                {% for value in option.values %}
-                  <option
-                    class=""
-                    value="{{ value | escape }}"
-                    class="bg-gray-300"
-                    {% if option.selected_value == value %}
-                      selected="selected" class="w-full bg-red-200"
-                    {% endif %}
-                  >
-                    {{ value }}
-                  </option>
-                {% endfor %}
-              </select>
-            </div>
-          {% endfor %}
-        {% endunless %}
-
-        <div>
-          <a href="{{ product.url }}">
-            <button type="submit" name="add" class="rounded cursor-pointer w-full bg-black text-white py-4">
-              +   Add To Cart
-            </button>
-          </a>
-        </div>
-        <div>
-          {{ product.description }}
-        </div>
-        <div class="">
-          <div>
-            <img
-              src="{{ section.settings.upload_trust_badge_image | image_url:width:450 }}"
-              width=""
-              height=""
-              alt="{{ product.images.alt }}"
-            >
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -80,6 +120,48 @@
       "type": "image_picker",
       "id": "upload_trust_badge_image",
       "label": "Upload Trust Badge"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "title",
+      "limit": 1
+    },
+    {
+      "type": "varient",
+      "name": "varient",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "addtocart",
+      "name": "Add To Cart",
+      "limit": 1
+    },
+    {
+      "type": "checkout",
+      "name": "Checkout",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+        "name": "Custom Product Template"
     }
   ]
 }

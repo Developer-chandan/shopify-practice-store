@@ -1,0 +1,146 @@
+{{ 'advanced-product.css' | asset_url | stylesheet_tag }}
+<script defer src="{{ 'varient-picker.js' | asset_url}}"></script>
+
+<div class="container-custom">
+  <!-- ================= PRODUCT SECTION ================= -->
+  <section class="product-section">
+    <!-- Product Images -->
+    <div class="product-images">
+      <div class="main-image">
+        <img src="{{ product.selected_or_first_available_variant.featured_image | image_url:width:450 }}" width="" height="" alt="">
+        
+        {% comment %} {% for media in product.media limit: 1 %}
+          {% render 'custom-media', media: media %}
+        {% endfor %}
+      </div>
+      <div class="thumbnail-column">
+        {% for media in product.media %}
+          {% render 'custom-media', media: media %}
+        {% endfor %} {% endcomment %}
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="product-details">
+      {% form 'product', product %}
+        <div class="rating">
+          <div class="stars">★★★★★</div>
+          <span>(124 reviews)</span>
+        </div>
+
+        {% comment %} <h1 class="product-title">{{ product.title }}</h1> {% endcomment %}
+        {% comment %} <h1 class="product-title">Product Title -  Hard Code Test</h1> {% endcomment %}
+        <h1 class="product-title">{{ product.title }}</h1>
+        {% if product.metafields.custom.subtitle != blank %}
+          <div class="subtitle">{{ product.metafields.custom.subtitle | metafield_tag }}</div>
+        {% endif %}
+        <p class="short-description">{{ product.description }}</p>
+
+        {% comment %} product varients  {% endcomment %}
+        <h2>Product Varients</h2>
+       
+       <varient-picker data-section-id="{{ section.id }}">
+         <select name="id">
+          {% for variant in product.variants %}
+            <option
+              value="{{ variant.id }}"
+              {% if variant.id == product.selected_or_first_available_variant.id %}
+                selected
+              {% endif %}
+            >
+              {{ variant.title }}
+            </option>
+          {% endfor %}
+        </select>
+      </varient-picker>
+       
+        <div class="swatches">
+          <div class="swatch active" style="background:red;"></div>
+          <div class="swatch" style="background:blue;"></div>
+          <div class="swatch" style="background:black;"></div>
+        </div>
+
+        <button type="submit" name="add" class="add-to-cart">Add to Cart - {{ product.selected_or_first_available_variant.price | money }}</button>
+        <p>{{ product.metafields.custom.shipping_note }}</p>
+        <div class="flex flex-col justify-start">
+          <div class="w-[100px]">
+            <img src="{{ 'applepay-svgrepo-com.svg' | asset_url }}" width="" height="" alt="">
+          </div>
+          <div class="block">{{ product.metafields.custom.afterpay_notes | metafield_tag }}</div>
+        </div>
+      {% endform %}
+
+      <!-- Product Add-ons -->
+      <div class="addons">
+        <h3>Suggested Add-ons</h3>
+        {% if product.metafields.custom.select_addon %}
+          {% assign addons = product.metafields.custom.select_addon.value %}
+          <div class="addon-item">
+            <img src="{{ addons.featured_image | asset_url:width:150 }}" width="" height="" alt="">
+            <div class="addon-info">
+              <h4>{{ addons.title }}</h4>
+              <span>{{ addons.price | money }}</span>
+            </div>
+            <input type="checkbox">
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Accordion -->
+      <div class="accordion">
+        <div class="accordion-item">
+          <input type="checkbox" id="acc1">
+          <label class="accordion-title" for="acc1">Shipping Info</label>
+          <div class="accordion-content">We offer fast worldwide shipping with tracking.</div>
+        </div>
+
+        <div class="accordion-item">
+          <input type="checkbox" id="acc2">
+          <label class="accordion-title" for="acc2">Return Policy</label>
+          <div class="accordion-content">30-day hassle-free returns guaranteed.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THREE CARD SECTION ================= -->
+  <section class="info-section">
+    <div class="card-grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300" width="" height="" alt="">
+        <div class="card-content">
+          <h3>Feature One</h3>
+          <p>Short description about this feature.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300" width="" height="" alt="">
+        <div class="card-content">
+          <h3>Feature Two</h3>
+          <p>Short description about this feature.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300" width="" height="" alt="">
+        <div class="card-content">
+          <h3>Feature Three</h3>
+          <p>Short description about this feature.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= STICKY BOTTOM BAR ================= -->
+<div class="sticky-bar w-1/2">
+  <div class="sticky-bar-info">
+    <img src="https://via.placeholder.com/50" width="" height="" alt="">
+    <div>
+      <strong>Premium Product</strong><br>
+      $99.99
+    </div>
+  </div>
+  <button>Add to Cart</button>
+</div>
