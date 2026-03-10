@@ -1,0 +1,600 @@
+{% doc %}
+  @prompt
+    Create a modern hero section with the following features:SECTION STRUCTURE:- Full-width responsive hero section- Two-column layout: left side for content, right side for image- Clean, modern design with customizable spacing and colorsDRAGGABLE BLOCKS (must be rearrangeable in theme editor):1. Heading block - large, bold heading with customizable text, size, and color2. Subtext block - paragraph text with rich text editor, customizable size and color3. Button block - call-to-action button with customizable text, link, colors, padding, and border radius4. Statistics block - display a single stat with number and label, customizable styling (merchants can add multiple stat blocks)5. Image block - hero image with border radius controlSECTION-LEVEL SETTINGS (global controls):- Maximum width control (1000-1600px)- Section padding (top and bottom)- Background color- Enable/disable decorative star elements with position and color controlsDESIGN REQUIREMENTS:- Mobile responsive (stack content vertically on mobile)- Smooth hover effects on buttons- Professional typography hierarchy- Support for placeholder images when no image is selected- All blocks must be independently draggable and reorderable in the theme customizerMake it visually appealing with modern CSS, flexbox layout, and ensure all customization options are easily accessible in the Shopify theme editor.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{{ section.id }}
+
+{% style %}
+  .ai-hero-block-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-hero-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-hero-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .ai-hero-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ai-hero-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .ai-hero-subtext-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtext_size }}px;
+    color: {{ block.settings.subtext_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-hero-subtext-{{ ai_gen_id }} p {
+    margin: 0;
+  }
+
+  .ai-hero-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-hero-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    transform: translateY(-2px);
+  }
+
+  .ai-hero-stats-{{ ai_gen_id }} {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ai-hero-stat-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ai-hero-stat-number-{{ ai_gen_id }} {
+    font-size: {{ block.settings.stat_number_size }}px;
+    color: {{ block.settings.stat_number_color }};
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .ai-hero-stat-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.stat_label_size }}px;
+    color: {{ block.settings.stat_label_color }};
+    margin: 0;
+  }
+
+  .ai-hero-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-hero-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: block;
+  }
+
+  .ai-hero-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-hero-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #f3f3f3;
+  }
+
+  .ai-hero-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-hero-star-{{ ai_gen_id }} {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+  }
+
+  .ai-hero-star-1-{{ ai_gen_id }} {
+    top: {{ block.settings.star_1_top }}%;
+    left: {{ block.settings.star_1_left }}%;
+  }
+
+  .ai-hero-star-2-{{ ai_gen_id }} {
+    top: {{ block.settings.star_2_top }}%;
+    left: {{ block.settings.star_2_left }}%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-hero-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-hero-content-{{ ai_gen_id }} {
+      order: 1;
+    }
+
+    .ai-hero-image-wrapper-{{ ai_gen_id }} {
+      order: 2;
+    }
+
+    .ai-hero-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.7);
+    }
+
+    .ai-hero-subtext-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtext_size }}px * 0.9);
+    }
+
+    .ai-hero-stats-{{ ai_gen_id }} {
+      gap: 24px;
+    }
+  }
+{% endstyle %}
+
+<ai-hero-block-{{ ai_gen_id }} class="ai-hero-block-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.enable_stars %}
+    <svg class="ai-hero-star-{{ ai_gen_id }} ai-hero-star-1-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="{{ block.settings.star_color }}">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    </svg>
+    <svg class="ai-hero-star-{{ ai_gen_id }} ai-hero-star-2-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="{{ block.settings.star_color }}">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    </svg>
+  {% endif %}
+
+  <div class="ai-hero-container-{{ ai_gen_id }}">
+    <div class="ai-hero-grid-{{ ai_gen_id }}">
+      <div class="ai-hero-content-{{ ai_gen_id }}">
+        {% if block.settings.heading_text != blank %}
+          <h1 class="ai-hero-heading-{{ ai_gen_id }}">
+            {{ block.settings.heading_text }}
+          </h1>
+        {% endif %}
+
+        {% if block.settings.subtext_content != blank %}
+          <div class="ai-hero-subtext-{{ ai_gen_id }}">
+            {{ block.settings.subtext_content }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.button_text != blank %}
+          <div>
+            <a href="{{ block.settings.button_link }}" class="ai-hero-button-{{ ai_gen_id }}">
+              {{ block.settings.button_text }}
+            </a>
+          </div>
+        {% endif %}
+
+        {% if block.settings.show_stats %}
+          <div class="ai-hero-stats-{{ ai_gen_id }}">
+            {% if block.settings.stat_1_number != blank %}
+              <div class="ai-hero-stat-{{ ai_gen_id }}">
+                <div class="ai-hero-stat-number-{{ ai_gen_id }}">{{ block.settings.stat_1_number }}</div>
+                <div class="ai-hero-stat-label-{{ ai_gen_id }}">{{ block.settings.stat_1_label }}</div>
+              </div>
+            {% endif %}
+
+            {% if block.settings.stat_2_number != blank %}
+              <div class="ai-hero-stat-{{ ai_gen_id }}">
+                <div class="ai-hero-stat-number-{{ ai_gen_id }}">{{ block.settings.stat_2_number }}</div>
+                <div class="ai-hero-stat-label-{{ ai_gen_id }}">{{ block.settings.stat_2_label }}</div>
+              </div>
+            {% endif %}
+
+            {% if block.settings.stat_3_number != blank %}
+              <div class="ai-hero-stat-{{ ai_gen_id }}">
+                <div class="ai-hero-stat-number-{{ ai_gen_id }}">{{ block.settings.stat_3_number }}</div>
+                <div class="ai-hero-stat-label-{{ ai_gen_id }}">{{ block.settings.stat_3_label }}</div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ai-hero-image-wrapper-{{ ai_gen_id }}">
+        {% if block.settings.hero_image %}
+          <img
+            src="{{ block.settings.hero_image | image_url: width: 1200 }}"
+            alt="{{ block.settings.hero_image.alt | escape }}"
+            class="ai-hero-image-{{ ai_gen_id }}"
+            loading="lazy"
+            width="{{ block.settings.hero_image.width }}"
+            height="{{ block.settings.hero_image.height }}"
+          >
+        {% else %}
+          <div class="ai-hero-image-placeholder-{{ ai_gen_id }}">
+            {{ 'hero-apparel-1' | placeholder_svg_tag }}
+            <div class="ai-hero-empty-state-{{ ai_gen_id }}">
+              Add an image to complete your hero section
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</ai-hero-block-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AiHeroBlock{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+    }
+    customElements.define('ai-hero-block-{{ ai_gen_id }}', AiHeroBlock{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Modern hero",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_text",
+      "label": "Text",
+      "default": "Transform Your Business Today"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 56
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext_content",
+      "label": "Text",
+      "default": "<p>Discover innovative solutions that help you grow faster and achieve your goals with confidence.</p>"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text",
+      "default": "Get started"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#334fb4"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Statistics"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show statistics",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "stat_number_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Number size",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "stat_number_color",
+      "label": "Number color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "stat_label_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Label size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "stat_label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_number",
+      "label": "Stat 1 number",
+      "default": "10K+"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Happy customers"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_number",
+      "label": "Stat 2 number",
+      "default": "50+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Countries"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_number",
+      "label": "Stat 3 number",
+      "default": "99%"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Satisfaction"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Decorative stars"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_stars",
+      "label": "Enable stars",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Color",
+      "default": "#334fb4"
+    },
+    {
+      "type": "range",
+      "id": "star_1_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 1 top position",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "star_1_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 1 left position",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "star_2_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 2 top position",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "star_2_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 2 left position",
+      "default": 90
+    }
+  ],
+  "presets": [
+    {
+      "name": "Modern hero"
+    }
+  ]
+}
+{% endschema %}

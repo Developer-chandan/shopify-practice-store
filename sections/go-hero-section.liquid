@@ -1,0 +1,126 @@
+{% stylesheet %}
+  .go_pickle_hero {
+    position: relative;
+    height: 650px;
+  }
+
+  .go_pickle_hero .background_image {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -11;
+  }
+
+  .go_pickle_hero .background_image img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  .go_pickle_hero .hero_wrapper .title h4 {
+    font-size: 18px;
+  }
+
+  .go_pickle_hero .hero_wrapper .title h2 {
+    font-size: 65px;
+    line-height: 65px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    margin-top: 10px;
+  }
+  .go_pickle_hero .hero_wrapper .button_wrapper button {
+    background: orange;
+    padding: 11px 28px;
+    display: inline-block;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .go_pickle_hero .hero_wrapper .button_wrapper button:hover { 
+    background-color: orangered;
+  }
+  .go_pickle_hero .hero_wrapper .logo {
+    width: 150px;
+    height: auto;
+  }
+
+  .go_pickle_hero_wraper{
+    max-width: 550px;
+  }
+{% endstylesheet %}
+
+<div class="hero_wrapper">
+  <div class="background_image">
+    <img src="{{ section.settings.bg_image | image_url:width: 1500 | image_tag}}" width="100%" height="" alt="">
+  </div>
+  <div class="page-width">
+    <div class="go_pickle_hero_wraper">
+      <div>
+        <div class="logo">
+          <img src="{{ section.settings.logo | image_url:width: 150, height:auto}}" alt="">
+        </div>
+        <div class="title">
+          <h4>{{ section.settings.sub_title }}</h4>
+          <h2>{{ section.settings.title }}</h2>
+          <div class="button_wrapper">
+            <button href="{{ section.settings.button_url }}">
+              {{ section.settings.button_title }}
+            </button>
+          </div>
+          <h2>{{ section.settings.button }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Go Pickel Hero",
+  "class": "go_pickle_hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Upload Logo",
+      "id": "logo"
+    },
+    {
+      "type": "image_picker",
+      "label": "Background Image",
+      "id": "bg_image"
+    },
+    {
+      "type": "text",
+      "label": "Title",
+      "id": "title",
+      "default": "Make Deli-Grade Pickles at Home"
+    },
+    {
+      "type": "text",
+      "label": "Sub Title",
+      "id": "sub_title",
+      "default": "⏳in just one minute!"
+    },
+    {
+      "type": "url",
+      "label": "Button URL",
+      "id": "button_url"
+    },
+    {
+      "type": "text",
+      "label": "Button Title",
+      "id": "button_title",
+      "default": "Button Title"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Go Pickel Hero"
+    }
+  ]
+}
+{% endschema %}

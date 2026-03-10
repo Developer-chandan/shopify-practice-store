@@ -1,0 +1,601 @@
+
+{% comment %} {% assign section.id = block.id | replace: '_', '' | downcase %} {% endcomment %}
+
+{{ section.id }}
+
+{% style %}
+  .ai-hero-block-{{ section.id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-hero-container-{{ section.id }} {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-hero-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .ai-hero-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ai-hero-heading-{{ section.id }} {
+    font-size: {{ section.settings.heading_size }}px;
+    color: {{ section.settings.heading_color }};
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .ai-hero-subtext-{{ section.id }} {
+    font-size: {{ section.settings.subtext_size }}px;
+    color: {{ section.settings.subtext_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-hero-subtext-{{ section.id }} p {
+    margin: 0;
+  }
+
+  .ai-hero-button-{{ section.id }} {
+    display: inline-block;
+    padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-hero-button-{{ section.id }}:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    transform: translateY(-2px);
+  }
+
+  .ai-hero-stats-{{ section.id }} {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ai-hero-stat-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ai-hero-stat-number-{{ section.id }} {
+    font-size: {{ section.settings.stat_number_size }}px;
+    color: {{ section.settings.stat_number_color }};
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .ai-hero-stat-label-{{ section.id }} {
+    font-size: {{ section.settings.stat_label_size }}px;
+    color: {{ section.settings.stat_label_color }};
+    margin: 0;
+  }
+
+  .ai-hero-image-wrapper-{{ section.id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-hero-image-{{ section.id }} {
+    width: 100%;
+    height: auto;
+    border-radius: {{ section.settings.image_border_radius }}px;
+    display: block;
+  }
+
+  .ai-hero-image-placeholder-{{ section.id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: {{ section.settings.image_border_radius }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-hero-image-placeholder-{{ section.id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #f3f3f3;
+  }
+
+  .ai-hero-empty-state-{{ section.id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-hero-star-{{ section.id }} {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+  }
+
+  .ai-hero-star-1-{{ section.id }} {
+    top: {{ section.settings.star_1_top }}%;
+    left: {{ section.settings.star_1_left }}%;
+  }
+
+  .ai-hero-star-2-{{ section.id }} {
+    top: {{ section.settings.star_2_top }}%;
+    left: {{ section.settings.star_2_left }}%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-hero-grid-{{ section.id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-hero-content-{{ section.id }} {
+      order: 1;
+    }
+
+    .ai-hero-image-wrapper-{{ section.id }} {
+      order: 2;
+    }
+
+    .ai-hero-heading-{{ section.id }} {
+      font-size: calc({{ section.settings.heading_size }}px * 0.7);
+    }
+
+    .ai-hero-subtext-{{ section.id }} {
+      font-size: calc({{ section.settings.subtext_size }}px * 0.9);
+    }
+
+    .ai-hero-stats-{{ section.id }} {
+      gap: 24px;
+    }
+  }
+{% endstyle %}
+
+
+<div class="ai-hero-section-{{ section.id }} ai-hero-block-{{ section.id }}">
+  {% if section.settings.enable_stars %}
+    <svg class="ai-hero-star-{{ section.id }} ai-hero-star-1-{{ section.id }}" viewBox="0 0 24 24" fill="{{ section.settings.star_color }}">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    </svg>
+    <svg class="ai-hero-star-{{ section.id }} ai-hero-star-2-{{ section.id }}" viewBox="0 0 24 24" fill="{{ section.settings.star_color }}">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    </svg>
+  {% endif %}
+
+  <div class="ai-hero-container-{{ section.id }}">
+    <div class="ai-hero-grid-{{ section.id }}">
+      <div class="ai-hero-content-{{ section.id }}">
+        {% if section.settings.heading_text != blank %}
+          <h1 class="ai-hero-heading-{{ section.id }}">
+            {{ section.settings.heading_text }}
+          </h1>
+        {% endif %}
+
+        {% if section.settings.subtext_content != blank %}
+          <div class="ai-hero-subtext-{{ section.id }}">
+            {{ section.settings.subtext_content }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_text != blank %}
+          <div>
+            <a href="{{ section.settings.button_link }}" class="ai-hero-button-{{ section.id }}">
+              {{ section.settings.button_text }}
+            </a>
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_stats %}
+          <div class="ai-hero-stats-{{ section.id }}">
+            {% if section.settings.stat_1_number != blank %}
+              <div class="ai-hero-stat-{{ section.id }}">
+                <div class="ai-hero-stat-number-{{ section.id }}">{{ section.settings.stat_1_number }}</div>
+                <div class="ai-hero-stat-label-{{ section.id }}">{{ section.settings.stat_1_label }}</div>
+              </div>
+            {% endif %}
+
+            {% if section.settings.stat_2_number != blank %}
+              <div class="ai-hero-stat-{{ section.id }}">
+                <div class="ai-hero-stat-number-{{ section.id }}">{{ section.settings.stat_2_number }}</div>
+                <div class="ai-hero-stat-label-{{ section.id }}">{{ section.settings.stat_2_label }}</div>
+              </div>
+            {% endif %}
+
+            {% if section.settings.stat_3_number != blank %}
+              <div class="ai-hero-stat-{{ section.id }}">
+                <div class="ai-hero-stat-number-{{ section.id }}">{{ section.settings.stat_3_number }}</div>
+                <div class="ai-hero-stat-label-{{ section.id }}">{{ section.settings.stat_3_label }}</div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ai-hero-image-wrapper-{{ section.id }}">
+        {% if section.settings.hero_image %}
+          <img
+            src="{{ section.settings.hero_image | image_url: width: 1200 }}"
+            alt="{{ section.settings.hero_image.alt | escape }}"
+            class="ai-hero-image-{{ section.id }}"
+            loading="lazy"
+            width="{{ section.settings.hero_image.width }}"
+            height="{{ section.settings.hero_image.height }}"
+          >
+        {% else %}
+          <div class="ai-hero-image-placeholder-{{ section.id }}">
+            {{ 'hero-apparel-1' | placeholder_svg_tag }}
+            <div class="ai-hero-empty-state-{{ section.id }}">
+              Add an image to complete your hero section
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% comment %} <script>
+  (function() {
+    class AiHeroBlock{{ section.id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+    }
+    customElements.define('ai-hero-block-{{ section.id }}', AiHeroBlock{{ section.id }});
+  })();
+</script> {% endcomment %}
+
+{% schema %}
+{
+  "name": "Modern hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_text",
+      "label": "Text",
+      "default": "Transform Your Business Today"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 56
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext_content",
+      "label": "Text",
+      "default": "<p>Discover innovative solutions that help you grow faster and achieve your goals with confidence.</p>"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text",
+      "default": "Get started"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#334fb4"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Statistics"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show statistics",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "stat_number_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Number size",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "stat_number_color",
+      "label": "Number color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "stat_label_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Label size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "stat_label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_number",
+      "label": "Stat 1 number",
+      "default": "10K+"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Happy customers"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_number",
+      "label": "Stat 2 number",
+      "default": "50+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Countries"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_number",
+      "label": "Stat 3 number",
+      "default": "99%"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Satisfaction"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Decorative stars"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_stars",
+      "label": "Enable stars",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Color",
+      "default": "#334fb4"
+    },
+    {
+      "type": "range",
+      "id": "star_1_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 1 top position",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "star_1_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 1 left position",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "star_2_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 2 top position",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "star_2_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Star 2 left position",
+      "default": 90
+    }
+  ],
+  "presets": [
+    {
+      "name": "Modern hero"
+    }
+  ]
+}
+{% endschema %}

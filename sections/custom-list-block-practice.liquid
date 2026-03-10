@@ -1,0 +1,98 @@
+{% stylesheet %}
+  .feature-card {
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 320px;
+    background: #fff;
+  }
+
+  /* icon + title container */
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .card-text {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+  }
+{% endstylesheet %}
+
+<div class="custom_list">
+  <h1>Custom List block added</h1>
+
+  <div>
+    <div class="feature-card">
+      <div class="card-header">
+        {% for block in section.blocks %}
+              <h3 class="card-title">Fast Delivery {{ block.settings.title }}</h3>
+              <img
+                src="{{ block.settings.image_picker | image_url:width:200, height:150}}"
+                width=""
+                height=""
+                alt="Icon"
+                class="card-icon"
+              >
+         
+        {% endfor %}
+      </div>
+
+      <div class="card-text">
+        <p> {{ block.settings.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom List",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "default": "Title here..",
+          "label": "Title",
+          "id": "title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_picker",
+          "label": "Select Image"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description here"
+        }
+        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom List"
+    }
+  ]
+}
+{% endschema %}
