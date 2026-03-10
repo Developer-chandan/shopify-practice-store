@@ -30,18 +30,28 @@
     margin-bottom: 25px;
     margin-top: 10px;
   }
+
+
+
   .go_pickle_hero .hero_wrapper .button_wrapper button {
+    font-weight: 500;
+  
+  }
+
+
+  /* .go_pickle_hero .hero_wrapper .button_wrapper button {
     background: orange;
     padding: 11px 28px;
     display: inline-block;
     border-radius: 50px;
     cursor: pointer;
     font-weight: 500;
+    color: white;
   }
 
   .go_pickle_hero .hero_wrapper .button_wrapper button:hover { 
     background-color: orangered;
-  }
+  } */
   .go_pickle_hero .hero_wrapper .logo {
     width: 150px;
     height: auto;
@@ -52,12 +62,17 @@
   }
 {% endstylesheet %}
 
+
+{% liquid
+  assign color_scheme = section.settings.color_scheme
+%}
+
 <div class="hero_wrapper">
   <div class="background_image">
     <img src="{{ section.settings.bg_image | image_url:width: 1500 | image_tag}}" width="100%" height="" alt="">
   </div>
   <div class="page-width">
-    <div class="go_pickle_hero_wraper">
+    <div class="go_pickle_hero_wraper color-{{ color_scheme }} gradient">
       <div>
         <div class="logo">
           <img src="{{ section.settings.logo | image_url:width: 150, height:auto}}" alt="">
@@ -66,7 +81,7 @@
           <h4>{{ section.settings.sub_title }}</h4>
           <h2>{{ section.settings.title }}</h2>
           <div class="button_wrapper">
-            <button href="{{ section.settings.button_url }}">
+            <button class="button" href="{{ section.settings.button_url }}">
               {{ section.settings.button_title }}
             </button>
           </div>
@@ -114,6 +129,11 @@
       "label": "Button Title",
       "id": "button_title",
       "default": "Button Title"
+    },
+    {
+    "type": "color_scheme",
+    "id": "color_scheme",
+    "label": "Color Scheme"
     }
   ],
   "blocks": [],
