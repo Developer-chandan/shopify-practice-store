@@ -157,12 +157,24 @@
         "ai_gen_block_793b0d8_VHpaxm"
       ],
       "settings": {}
+    },
+    "go_hero_section_6pK3mm": {
+      "type": "go-hero-section",
+      "name": "Go Pickel Hero",
+      "settings": {
+        "title": "Make Deli-Grade Pickles at Home",
+        "sub_title": "⏳in just one minute!",
+        "button_url": "",
+        "button_title": "Button Title",
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "17725170336ddd451c",
     "1772597944e374ebde",
     "blocks_dttqh3",
-    "17730298399f57e699"
+    "17730298399f57e699",
+    "go_hero_section_6pK3mm"
   ]
 }
