@@ -3595,3 +3595,23 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+
+
+
+/* custom css  */
+
+
+h2.title{
+  font-size: 50px;
+  line-height: 65px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px){
+  h2.title{
+  font-size: 40px;
+  line-height: 45px;
+  
+}
+}

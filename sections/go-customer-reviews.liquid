@@ -1,0 +1,115 @@
+{% stylesheet %}
+  .reviews_wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 0;
+    gap: 55px;
+  }
+
+  .review_card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .review_card .review-details strong {
+    line-height: 26px;
+  }
+
+
+  .review_section{
+    padding: 35px 0;
+  }
+
+  .review_card .reviews{
+    margin-bottom: 10px; 
+  }
+
+
+{% endstylesheet %}
+
+{% liquid
+  assign color_scheme = section.settings.color_scheme
+  for block in section.blocks
+  assign reviews_title = block.settings.reviews_title
+  assign reviews_author = block.settings.reviews_author
+  endfor
+  
+%}
+
+<div class="color-{{ color_scheme }} gradiant review_section">
+  <div class="review_section_wrapper page-width reviews_wrap">
+    <div class="">
+      {% if section.settings.show_review_title %}
+        <h1>{{ section.settings.show_review_title }}</h1>
+      {% endif %}
+    </div>
+
+    {% for blocks in section.blocks %}
+        
+      <div class="review_card">
+        <div class="reviews">
+          {% render 'icon-go-reviews' %}
+        </div>
+        <div class="review-details">
+          <strong>״{{ reviews_title }}</strong>
+          <span>״ {{ reviews_author }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Gopickle Reviews",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_review_title",
+      "label": "Show Review Title"
+    },
+    {
+      "type": "text",
+      "id": "show_review_text",
+      "label": "Show Review Title",
+      "default": "Reviews"
+    },
+    {
+      "type": "color_scheme",
+      "default": "scheme-1",
+      "label": "Color Scheme",
+      "id": "color_scheme"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Review",
+      "name": "Reviews",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "reviews_title",
+          "default": "״I’ve never tasted pickles this good outside a deli!"
+        },
+        {
+          "type": "text",
+          "label": "Author",
+          "id": "reviews_author",
+          "default": "Chandan Sen"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gopickle Reviwes",
+      "blocks": [{ "type": "Review" }]
+    }
+  ]
+}
+{% endschema %}

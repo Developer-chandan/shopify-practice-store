@@ -158,15 +158,114 @@
       ],
       "settings": {}
     },
-    "go_hero_section_6pK3mm": {
+    "go_hero_section_xcfWyn": {
       "type": "go-hero-section",
       "name": "Go Pickel Hero",
       "settings": {
+        "logo": "shopify://shop_images/Group_67.png",
+        "bg_image": "shopify://shop_images/Group_120.png",
         "title": "Make Deli-Grade Pickles at Home",
         "sub_title": "⏳in just one minute!",
-        "button_url": "",
-        "button_title": "Button Title",
-        "color_scheme": ""
+        "button_url": "shopify://products/classic-varsity-top",
+        "button_title": "Order your kit now",
+        "color_scheme": "scheme-c671d140-eab3-4adb-8e1f-fed735b20f64"
+      }
+    },
+    "go_customer_reviews_Gtpt6i": {
+      "type": "go-customer-reviews",
+      "blocks": {
+        "review_b6de9K": {
+          "type": "Review",
+          "settings": {
+            "reviews_title": "״I’ve never tasted pickles this good outside a deli!",
+            "reviews_author": "Chandan Sen"
+          }
+        },
+        "review_NRkXJr": {
+          "type": "Review",
+          "settings": {
+            "reviews_title": "״I’ve never tasted pickles this good outside a deli!",
+            "reviews_author": "Chandan Sen"
+          }
+        },
+        "review_dAzj4H": {
+          "type": "Review",
+          "settings": {
+            "reviews_title": "״I’ve never tasted pickles this good outside a deli!",
+            "reviews_author": "Chandan Sen"
+          }
+        }
+      },
+      "block_order": [
+        "review_b6de9K",
+        "review_NRkXJr",
+        "review_dAzj4H"
+      ],
+      "name": "Gopickle Reviwes",
+      "settings": {
+        "show_review_title": false,
+        "show_review_text": "Reviews",
+        "color_scheme": "scheme-51f08410-58bc-4235-8a7a-4e017e9964a6"
+      }
+    },
+    "go_product_features_YqcDiy": {
+      "type": "go-product-features",
+      "blocks": {
+        "product_feature_LiqwMX": {
+          "type": "Product_Feature",
+          "settings": {
+            "title": "🥪 Authentic Deli Flavor",
+            "description": "Get that signature crunch and bold taste at home",
+            "has_svg": false
+          }
+        },
+        "product_feature_bnyLYY": {
+          "type": "Product_Feature",
+          "settings": {
+            "title": "🌿 Pure & Natural",
+            "description": "No artificial preservatives - just fresh, flavorful ingredients.",
+            "has_svg": false
+          }
+        },
+        "product_feature_V7XXEH": {
+          "type": "Product_Feature",
+          "settings": {
+            "title": "🦠 Gut-Friendly Goodness",
+            "description": "Packed with probiotics for better digestion and immunity",
+            "has_svg": false
+          }
+        },
+        "product_feature_6FBQ8E": {
+          "type": "Product_Feature",
+          "settings": {
+            "title": "⚡ Quick & Simple",
+            "description": "Easy-to-use kit with pre-measured spice blends.",
+            "has_svg": false
+          }
+        },
+        "product_feature_iEQ9yp": {
+          "type": "Product_Feature",
+          "settings": {
+            "title": "♻️ Sustainable & Reusable",
+            "description": "Eco-friendly glass jars for long-term use.",
+            "has_svg": false
+          }
+        }
+      },
+      "block_order": [
+        "product_feature_LiqwMX",
+        "product_feature_bnyLYY",
+        "product_feature_V7XXEH",
+        "product_feature_6FBQ8E",
+        "product_feature_iEQ9yp"
+      ],
+      "name": "Gopickle Product Features",
+      "settings": {
+        "features_title": "Why You'll Love Our Pickling Kit",
+        "color_scheme": "scheme-8dcbd900-7e2e-4dac-810f-fa301f71b6ac",
+        "select_options": "Mobile",
+        "button_text": "Order your kit now",
+        "button_url": "shopify://products/black-leather-bag"
       }
     }
   },
@@ -175,6 +274,8 @@
     "1772597944e374ebde",
     "blocks_dttqh3",
     "17730298399f57e699",
-    "go_hero_section_6pK3mm"
+    "go_hero_section_xcfWyn",
+    "go_customer_reviews_Gtpt6i",
+    "go_product_features_YqcDiy"
   ]
 }

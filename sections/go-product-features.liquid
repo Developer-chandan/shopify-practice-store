@@ -1,0 +1,244 @@
+{% stylesheet %}
+  .section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 20px;
+  }
+  .featurs_title {
+    display: flex;
+    align-items: center;
+  }
+
+  .feature_section_heading {
+    /* text-align: center;
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+    font-weight: 800;
+    color: #2e3d2f; */
+    text-align: center;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 60px;
+  }
+
+  .feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .featurs_title h4 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+  }
+
+  .feature p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .feature_section_heading {
+    padding: 50px 0;
+  }
+
+  .features_list_wrap {
+    margin-bottom: 30px;
+  }
+  /* center last two items */
+  .features .feature:nth-child(4) {
+    grid-column: 1 / span 1;
+  }
+
+  .features .feature:nth-child(5) {
+    grid-column: 2 / span 1;
+  }
+
+  .button_wrap{
+    margin-top: 20px;
+    margin-bottom: 45px;
+   display: flex;
+   justify-content: center;
+  }
+
+
+
+  .button_wrap button{
+    display: none;
+  }
+
+  .button_wrap button.visible_desktop_mobile{
+    display: flex;
+  }
+ 
+ @media (min-width: 768px){
+  .button_wrap button{
+    width: 100%;
+  }
+    .button_wrap button.visible_desktop{
+    display: flex;
+  }
+  }
+
+  @media (max-width: 768px){
+    .button_wrap button.visible_mobile{
+    display: flex;
+  }
+  }
+
+ 
+
+
+
+  /* responsive */
+  @media (max-width: 900px) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features .feature:nth-child(4),
+    .features .feature:nth-child(5) {
+      grid-column: auto;
+    }
+
+  }
+
+  @media (max-width: 500px) {
+    .features {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+<section class="color-{{ section.settings.color_scheme }} gradiant">
+  <h2 class="title feature_section_heading">{{ section.settings.features_title }}</h2>
+  <div class="features_list_wrap page-width">
+    <div class="features">
+      {% for block in section.blocks %}
+        {% liquid
+          assign title = block.settings.title
+          assign description = block.settings.description
+          assign upload_svg = block.settings.upload_svg
+        %}
+        <div class="feature_card">
+          <div class="featurs_title">
+            <span class="icon">{{ upload_svg }}</span>
+            <h4>{{ title }}</h4>
+          </div>
+          <p>{{ description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.select_options != blank %}
+      <div class="button_wrap">
+   
+      <button class="button 
+        {% if section.settings.select_options == "Mobile_desktop" %}visible_desktop_mobile{% endif %}
+        {% if section.settings.select_options == "Mobile" %}visible_mobile{% endif %}
+        {% if section.settings.select_options == "Desktop" %}visible_desktop{% endif %}"
+
+          href="{{ section.settings.button_url }}"
+        >
+          {{ section.settings.button_text }}
+      </button>
+  
+    </div>
+    {% endif %}
+    
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gopickle Product Features",
+  "settings": [
+    {
+      "type": "text",
+      "default": "Why You'll Love Our Pickling Kit",
+      "id": "features_title",
+      "label": "Section Title"
+    },
+    {
+      "type": "color_scheme",
+      "default": "scheme-1",
+      "id": "color_scheme",
+      "label": "Color Scheme"
+    },
+    {
+     "type": "select",
+     "label": "Show button",
+     "default": "Mobile",
+     "id": "select_options",
+     "options": [
+      { "value": "Mobile",
+        "label": "Mobile Only"
+      },
+      { "value": "Desktop",
+        "label": "Desktop Only"
+      },
+      { "value": "Mobile_desktop",
+        "label": "Both Mobile & Desktop"
+      }
+     
+     ]
+    },
+    {
+    "type": "text",
+    "id": "button_text",
+    "default": "Order your kit now",
+    "label": "Button Title"
+    },
+    {
+    "type": "url",
+    "id": "button_url",
+    "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Product_Feature",
+      "name": "Product Feature",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Eco-friendly glass jars for long-term use."
+        },
+        {
+          "type": "checkbox",
+          "id": "has_svg",
+          "label": "Enable SVG upload"
+        },
+        {
+          "type": "image_picker",
+          "id": "upload_svg",
+          "label": "Upload SVG"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gopickle Product Features"
+    }
+  ]
+}
+{% endschema %}
