@@ -9,155 +9,6 @@
  */
 {
   "sections": {
-    "17725170336ddd451c": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_1ee0ccd_b9ULpE": {
-          "type": "hero-section",
-          "settings": {
-            "max_width": 1200,
-            "section_padding_top": 60,
-            "section_padding_bottom": 60,
-            "background_color": "#f2f0f1",
-            "heading": "FIND CLOTHES THAT MATCHES YOUR STYLE",
-            "heading_size": 56,
-            "heading_color": "#000000",
-            "subtext": "<p>Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>",
-            "subtext_size": 16,
-            "subtext_color": "#666666",
-            "button_text": "Shop Now",
-            "button_link": "shopify://collections",
-            "button_font_size": 16,
-            "button_padding_vertical": 16,
-            "button_padding_horizontal": 50,
-            "button_radius": 30,
-            "button_color": "#000000",
-            "button_text_color": "#ffffff",
-            "button_hover_color": "#333333",
-            "button_hover_text_color": "#ffffff",
-            "show_stats": true,
-            "stat_1_number": "200+",
-            "stat_1_label": "International Brands",
-            "stat_2_number": "2,000+",
-            "stat_2_label": "High-Quality Products",
-            "stat_3_number": "30,000+",
-            "stat_3_label": "Happy Customers",
-            "stat_number_size": 36,
-            "stat_number_color": "#000000",
-            "stat_label_size": 14,
-            "stat_label_color": "#666666",
-            "image": "shopify://shop_images/new-shop-Rectangle22.png",
-            "image_radius": 0,
-            "show_stars": false,
-            "star_size": 50,
-            "star_color": "#000000",
-            "star_1_top": 15,
-            "star_1_left": 5,
-            "star_2_top": 40,
-            "star_2_left": 10,
-            "star_3_top": 20,
-            "star_3_right": 5,
-            "star_4_bottom": 15,
-            "star_4_right": 10
-          },
-          "blocks": {}
-        },
-        "ai_gen_block_ee43c77_WjNQnc": {
-          "type": "logo-block",
-          "settings": {
-            "show_heading": false,
-            "heading": "Trusted by leading brands",
-            "heading_size": 32,
-            "heading_spacing": 40,
-            "columns_desktop": 5,
-            "rows_desktop": 1,
-            "columns_mobile": "3",
-            "gap_desktop": 12,
-            "gap_mobile": 20,
-            "container_width": 1200,
-            "logo_max_height": 80,
-            "logo_padding": 16,
-            "logo_filter": "none",
-            "logo_filter_hover": "none",
-            "background_color": "#000000",
-            "heading_color": "#ffffff",
-            "padding_top": 24,
-            "padding_bottom": 24,
-            "logo_1": "shopify://shop_images/logo-1.png",
-            "logo_2": "shopify://shop_images/logo-2.png",
-            "logo_3": "shopify://shop_images/logo-4.png",
-            "logo_4": "shopify://shop_images/logo-3.png",
-            "logo_5": "shopify://shop_images/logo-5.png"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_1ee0ccd_b9ULpE",
-        "ai_gen_block_ee43c77_WjNQnc"
-      ],
-      "settings": {}
-    },
-    "1772597944e374ebde": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "blocks_dttqh3": {
-      "type": "_blocks",
-      "name": "Featured collection",
-      "settings": {}
-    },
-    "17730298399f57e699": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_793b0d8_VHpaxm": {
-          "type": "ai_gen_block_793b0d8",
-          "settings": {
-            "max_width": 1200,
-            "padding_top": 60,
-            "padding_bottom": 60,
-            "background_color": "#ffffff",
-            "heading_text": "Transform Your Business Today",
-            "heading_size": 56,
-            "heading_color": "#121212",
-            "subtext_content": "<p>Discover innovative solutions that help you grow faster and achieve your goals with confidence.</p>",
-            "subtext_size": 18,
-            "subtext_color": "#666666",
-            "button_text": "Get started",
-            "button_link": "",
-            "button_bg_color": "#121212",
-            "button_text_color": "#ffffff",
-            "button_hover_bg_color": "#334fb4",
-            "button_padding_vertical": 16,
-            "button_padding_horizontal": 32,
-            "button_border_radius": 4,
-            "show_stats": true,
-            "stat_number_size": 36,
-            "stat_number_color": "#121212",
-            "stat_label_size": 14,
-            "stat_label_color": "#666666",
-            "stat_1_number": "10K+",
-            "stat_1_label": "Happy customers",
-            "stat_2_number": "50+",
-            "stat_2_label": "Countries",
-            "stat_3_number": "99%",
-            "stat_3_label": "Satisfaction",
-            "image_border_radius": 12,
-            "enable_stars": true,
-            "star_color": "#334fb4",
-            "star_1_top": 10,
-            "star_1_left": 5,
-            "star_2_top": 80,
-            "star_2_left": 90
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_793b0d8_VHpaxm"
-      ],
-      "settings": {}
-    },
     "go_hero_section_xcfWyn": {
       "type": "go-hero-section",
       "name": "Go Pickel Hero",
@@ -267,15 +118,20 @@
         "button_text": "Order your kit now",
         "button_url": "shopify://products/black-leather-bag"
       }
+    },
+    "go_package_tkmjta": {
+      "type": "go-package",
+      "name": "Gopickle Package",
+      "settings": {
+        "text": "What's In The Package",
+        "bg_image_picker": "shopify://shop_images/Frame_115.jpg"
+      }
     }
   },
   "order": [
-    "17725170336ddd451c",
-    "1772597944e374ebde",
-    "blocks_dttqh3",
-    "17730298399f57e699",
     "go_hero_section_xcfWyn",
     "go_customer_reviews_Gtpt6i",
-    "go_product_features_YqcDiy"
+    "go_product_features_YqcDiy",
+    "go_package_tkmjta"
   ]
 }
