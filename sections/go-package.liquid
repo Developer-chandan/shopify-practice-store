@@ -1,59 +1,53 @@
-
 {% stylesheet %}
-    .go_package_wrapper{
-        position: relative;
-        width: 100%;
-    }
-    .go_package_title{
-        position: absolute;
-        top: 20px;
-        left: 0px;
-        text-align: center;
-    }
-    .go_package_title{
-        width: 100%;
-        text-align: center;
-    }
-    .bg_image_wrapper img{
-        width: 100%;
-
-    }
+  .go_package_wrapper {
+    position: relative;
+    width: 100%;
+  }
+  .go_package_title {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    text-align: center;
+  }
+  .go_package_title {
+    width: 100%;
+    text-align: center;
+  }
+  .bg_image_wrapper img {
+    width: 100%;
+  }
 {% endstylesheet %}
 
-
 <div class="go_package_wrapper">
-    <div class="go_package_title">
-
-        <h2 class="title">{{ section.settings.text }}</h2>
-    </div>
-<div class="bg_image_wrapper">
-
+  <div class="go_package_title">
+    <h2 class="title">{{ section.settings.text }}</h2>
+  </div>
+  <div class="bg_image_wrapper">
     <img src="{{ section.settings.bg_image_picker | image_url:width:1500 }}" width="" height="" alt="">
+  </div>
 </div>
-</div>
-
 
 {% schema %}
+{
+  "name": "Gopickle Package",
+  "settings": [
     {
-        "name": "Gopickle Package",
-        "settings": [
-            {
-             "type": "text",
-             "id": "text",
-             "default": "What's In The Package",
-             "label": "Title"
-            },
-            {
-             "type": "image_picker",
-             "id": "bg_image_picker",
-             "label": "Background Image"
-            }
-        ],
-        "blocks": [],
-        "presets": [
-            {
-             "name": "Gopickle Package"
-            }
-        ]
+      "type": "text",
+      "id": "text",
+      "default": "What's In The Package",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_picker",
+      "label": "Background Image"
     }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Gopickle Package"
+    }
+  ]
+}
 {% endschema %}

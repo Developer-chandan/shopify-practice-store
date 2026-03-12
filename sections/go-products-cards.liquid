@@ -1,0 +1,106 @@
+{% stylesheet %}
+    .product_wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .product_card{
+        flex-basis: 33.33%;
+        text-align: center;
+    }
+
+    .product_title h4{
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 600;
+    }
+    .product_cards_title{
+        text-align: center;
+    }
+    .product_card_main_wrap{
+        padding: 50px 0;
+    }
+
+
+{% endstylesheet %}
+
+
+<div class="color-{{ section.settings.color_scheme }} gradiant product_card_main_wrap">
+  <div class="product_cards_title">
+    <h2 class="title">Our Winning Organic Spice Blends</h2>
+  </div>
+  <div class="page-width">
+    <div class="product_wrapper">
+      {% for block in section.blocks %}
+        {% liquid
+          assign product_image = block.settings.product_image
+          assign product_title = block.settings.product_title
+          assign product_desc = block.settings.product_desc
+        %}
+        <div class="product_card">
+          <div class="image">
+            {% if product_image %}
+                
+                <img src="{{product_image | image_url:width:450  }}" width="" height="" alt="">
+            {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                    
+            {% endif %}
+          </div>
+          <div class="product_title">
+            <h4>{{ product_title }}</h4>
+          </div>
+          <div class="description">
+            <p>{{ product_desc }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Go Pickle Product Cards",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "color_scheme",
+      "default": "scheme-7"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product Card",
+      "type": "product_cards",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "default": "The Real Dill",
+          "label": "Product Title"
+        },
+        {
+          "type": "text",
+          "id": "product_desc",
+          "default": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves.",
+          "label": "Product Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Go Products Cards"
+    }
+  ]
+}
+{% endschema %}

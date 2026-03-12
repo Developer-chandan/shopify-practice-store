@@ -126,12 +126,51 @@
         "text": "What's In The Package",
         "bg_image_picker": "shopify://shop_images/Frame_115.jpg"
       }
+    },
+    "go_products_cards_RAV8mX": {
+      "type": "go-products-cards",
+      "blocks": {
+        "product_cards_UDqDV3": {
+          "type": "product_cards",
+          "settings": {
+            "product_image": "shopify://shop_images/Group_92_7b0995bc-c4be-411b-9c98-d9d564866b1c.png",
+            "product_title": "The Real Dill",
+            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves."
+          }
+        },
+        "product_cards_QDrGPD": {
+          "type": "product_cards",
+          "settings": {
+            "product_image": "shopify://shop_images/Group_93.png",
+            "product_title": "Garlic Bites Back",
+            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves."
+          }
+        },
+        "product_cards_x4kgyg": {
+          "type": "product_cards",
+          "settings": {
+            "product_image": "shopify://shop_images/Group_94.png",
+            "product_title": "Turmeric Twist",
+            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves."
+          }
+        }
+      },
+      "block_order": [
+        "product_cards_UDqDV3",
+        "product_cards_QDrGPD",
+        "product_cards_x4kgyg"
+      ],
+      "name": "Go Products Cards",
+      "settings": {
+        "color_scheme": "scheme-51f08410-58bc-4235-8a7a-4e017e9964a6"
+      }
     }
   },
   "order": [
     "go_hero_section_xcfWyn",
     "go_customer_reviews_Gtpt6i",
     "go_product_features_YqcDiy",
-    "go_package_tkmjta"
+    "go_package_tkmjta",
+    "go_products_cards_RAV8mX"
   ]
 }
