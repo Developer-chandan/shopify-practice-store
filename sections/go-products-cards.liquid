@@ -1,8 +1,18 @@
-{% stylesheet %}
+{% liquid 
+ assign padding_bottom = section.settings.padding_bottom
+
+%}
+ 
+
+<style>
+
+
+
     .product_wrapper{
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 40px;
 
     }
     .product_card{
@@ -17,13 +27,35 @@
     }
     .product_cards_title{
         text-align: center;
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+    
+    .description p{
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 500;
+      color: black;
     }
     .product_card_main_wrap{
-        padding: 50px 0;
+        padding-bottom: {{padding_bottom}}px;
     }
 
 
-{% endstylesheet %}
+    @media(max-width: 768px){
+       .product_wrapper{
+        flex-direction: column;
+
+    }
+
+
+
+    }
+
+
+</style>
+ {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" /> {% endcomment %}
+
 
 
 <div class="color-{{ section.settings.color_scheme }} gradiant product_card_main_wrap">
@@ -37,28 +69,40 @@
           assign product_image = block.settings.product_image
           assign product_title = block.settings.product_title
           assign product_desc = block.settings.product_desc
+          assign link = block.settings.product_link
         %}
         <div class="product_card">
           <div class="image">
             {% if product_image %}
-                
-                <img src="{{product_image | image_url:width:450  }}" width="" height="" alt="">
+              
+                <a href="{{ link }}">
+                  <img src="{{product_image | image_url:width:450  }}" width="" height="" alt="">
+                </a>
             {% else %}
                     {{ 'image' | placeholder_svg_tag }}
                     
             {% endif %}
           </div>
           <div class="product_title">
-            <h4>{{ product_title }}</h4>
+            <h4>
+              <a href="{{link}}">
+
+                {{ product_title }}
+              </a>
+            </h4>
           </div>
           <div class="description">
             <p>{{ product_desc }}</p>
           </div>
         </div>
       {% endfor %}
+      <div class="swiper-pagination"></div>
+
     </div>
   </div>
 </div>
+
+
 
 {% schema %}
 {
@@ -69,6 +113,26 @@
       "id": "color_scheme",
       "label": "color_scheme",
       "default": "scheme-7"
+    },
+    {
+     "type": "range",
+     "label": "Padding Top",
+     "min": 15,
+     "max": 100,
+     "step": 5,
+     "id": "padding_top",
+     "default": 25,
+     "unit": "px"
+    },
+    {
+     "type": "range",
+     "label": "Padding Bottom",
+     "min": 15,
+     "max": 150,
+     "step": 5,
+     "id": "padding_bottom",
+     "default": 100,
+     "unit": "px"
     }
   ],
   "blocks": [
@@ -93,6 +157,11 @@
           "id": "product_desc",
           "default": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves.",
           "label": "Product Title"
+        },
+        {
+         "type": "url",
+         "label": "Product Link",
+         "id": "product_link"
         }
       ]
     }
@@ -104,3 +173,5 @@
   ]
 }
 {% endschema %}
+
+

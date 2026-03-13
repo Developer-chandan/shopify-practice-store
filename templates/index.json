@@ -135,7 +135,8 @@
           "settings": {
             "product_image": "shopify://shop_images/Group_92_7b0995bc-c4be-411b-9c98-d9d564866b1c.png",
             "product_title": "The Real Dill",
-            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves."
+            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves.",
+            "product_link": "shopify://products/dark-denim-top"
           }
         },
         "product_cards_QDrGPD": {
@@ -143,7 +144,8 @@
           "settings": {
             "product_image": "shopify://shop_images/Group_93.png",
             "product_title": "Garlic Bites Back",
-            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves."
+            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves.",
+            "product_link": "shopify://products/floral-white-top"
           }
         },
         "product_cards_x4kgyg": {
@@ -151,7 +153,8 @@
           "settings": {
             "product_image": "shopify://shop_images/Group_94.png",
             "product_title": "Turmeric Twist",
-            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves."
+            "product_desc": "Himalayan Pink Salt, Dried Dill, Organic Dried Garlic, Mustard Seeds, Peppercorns, Coriander Seeds, Dried Chili, Dried Bay Leaves.",
+            "product_link": "shopify://products/floral-white-top"
           }
         }
       },
@@ -162,7 +165,9 @@
       ],
       "name": "Go Products Cards",
       "settings": {
-        "color_scheme": "scheme-51f08410-58bc-4235-8a7a-4e017e9964a6"
+        "color_scheme": "scheme-51f08410-58bc-4235-8a7a-4e017e9964a6",
+        "padding_top": 25,
+        "padding_bottom": 95
       }
     }
   },
