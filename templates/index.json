@@ -169,6 +169,11 @@
         "padding_top": 25,
         "padding_bottom": 95
       }
+    },
+    "go_image_with_text_6hhrYA": {
+      "type": "go-image-with-text",
+      "name": "Gopickle Image with Text",
+      "settings": {}
     }
   },
   "order": [
@@ -176,6 +181,7 @@
     "go_customer_reviews_Gtpt6i",
     "go_product_features_YqcDiy",
     "go_package_tkmjta",
-    "go_products_cards_RAV8mX"
+    "go_products_cards_RAV8mX",
+    "go_image_with_text_6hhrYA"
   ]
 }
