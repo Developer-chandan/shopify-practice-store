@@ -102,7 +102,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 
 @media screen and (min-width: 750px) {
   .page-width {
-    padding: 0 5rem;
+    padding: 0 2rem;
   }
 
   .header.page-width,
@@ -3601,11 +3601,17 @@ details-disclosure > details {
 
 /* custom css  */
 
+.go_pickle_hero .hero_wrapper .title h2{
+   font-family: "Bebas Neue", sans-serif;
+   font-weight: 400;
+
+}
 
 h2.title{
   font-size: 50px;
   line-height: 65px;
-  font-weight: 600;
+  font-weight: 400;
+   font-family: "Bebas Neue", sans-serif;
 }
 
 @media (max-width: 768px){

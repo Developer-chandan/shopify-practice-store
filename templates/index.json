@@ -172,8 +172,44 @@
     },
     "go_image_with_text_6hhrYA": {
       "type": "go-image-with-text",
+      "blocks": {
+        "details_jJMa4c": {
+          "type": "details",
+          "settings": {
+            "svg_picker": "shopify://shop_images/Group_106.svg",
+            "details_text": "Choose your fresh cucumbers ( Kirby’s or Gherkin’s are best)."
+          }
+        },
+        "details_TXM7fE": {
+          "type": "details",
+          "settings": {
+            "svg_picker": "shopify://shop_images/Group_107.svg",
+            "details_text": "Add water and one of our pre-packed spices bags - Classic Dill, Garlic, or Turmeric."
+          }
+        },
+        "details_GxYm8W": {
+          "type": "details",
+          "settings": {
+            "svg_picker": "shopify://shop_images/Group_108.svg",
+            "details_text": "Store for 3 days at room temp, wait, and enjoy your homemade deli-grade pickles!"
+          }
+        }
+      },
+      "block_order": [
+        "details_jJMa4c",
+        "details_TXM7fE",
+        "details_GxYm8W"
+      ],
       "name": "Gopickle Image with Text",
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "section_gap": 40,
+        "description_gap": 30,
+        "product_image": "shopify://shop_images/Frame_80.png",
+        "section_title": "Craft Deli-Grade Pickles in 3 Easy Steps"
+      }
     }
   },
   "order": [
